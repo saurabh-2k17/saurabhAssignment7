@@ -1,0 +1,59 @@
+<html>
+	<font size="8" color="green">Final test lab</font><br><br>
+	Number of rows: <input type="text" id="t1" /><br><br>
+	Number of cols: <input type="text" id="t2" /><br><br>
+
+	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
+	<button id="b2" onclick="addColumn()">Add Column</button>
+
+	<button id="b3" onclick="addRow()">Add Row</button>
+
+	<div id="tableContainer"></div>
+
+	<script language="javascript">
+
+		function generateTable() {
+			var rows = parseInt(document.getElementById("t1").value);
+			var cols = parseInt(document.getElementById("t2").value);
+
+			var tableHTML = '<table border="1">';
+			for (var i = 0; i < rows; i++) {
+				tableHTML += '<tr>';
+				for (var j = 0; j < cols; j++) {
+					tableHTML += '<td>Row ' + (i + 1) + ', Col ' + (j + 1) + '</td>';
+				}
+				tableHTML += '</tr>';
+			}
+			tableHTML += '</table>';
+
+			document.getElementById("tableContainer").innerHTML = tableHTML;
+
+			// Hide input fields and generate button
+			document.getElementById("t1").style.display = "none";
+			document.getElementById("t2").style.display = "none";
+			document.getElementById("b1").style.display = "none";
+		}
+
+		function addColumn() {
+			var table = document.getElementsByTagName("table")[0];
+			var rowCount = table.rows.length;
+			for (var i = 0; i < rowCount; i++) {
+				var cell = table.rows[i].insertCell(-1);
+				cell.innerHTML = 'Row ' + (i + 1) + ', Col ' + (table.rows[i].cells.length);
+			}
+		}
+
+		function addRow() {
+			var table = document.getElementsByTagName("table")[0];
+			var newRow = table.insertRow(-1);
+			var colCount = table.rows[0].cells.length;
+			for (var i = 0; i < colCount; i++) {
+				var cell = newRow.insertCell(-1);
+				cell.innerHTML = 'Row ' + (table.rows.length) + ', Col ' + (i + 1);
+			}
+		}
+
+	</script>
+
+</html>
